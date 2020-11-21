@@ -12,9 +12,9 @@ public class HomeActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        TextView homeTextView = findViewById(R.id.textViewHome);
 
         setContentView(R.layout.activity_home);
-        TextView homeTextView = findViewById(R.id.textViewHome);
 
         Intent startingIntent = getIntent();
         Bundle bundle = startingIntent.getExtras();

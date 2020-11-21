@@ -1,11 +1,13 @@
 package com.example.volvo;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.PersistableBundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
@@ -55,6 +57,12 @@ public class MainActivity extends AppCompatActivity {
         super.onDestroy();
         Log.v(TAG,"ondestroy");
 
+    }
+
+    @Override
+    public void onSaveInstanceState(@NonNull Bundle outState, @NonNull PersistableBundle outPersistentState) {
+        super.onSaveInstanceState(outState, outPersistentState);
+        outState.putString("key","abdul");
     }
 
     public void clickHandler(View view) {
