@@ -10,24 +10,28 @@ import android.os.Bundle;
 import android.os.PersistableBundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements View.OnFocusChangeListener {
 
     private static final String TAG = MainActivity.class.getSimpleName() ;
+    EditText nameEditText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main); //layout inflater
         Log.i(TAG,"oncreate");
+        nameEditText = findViewById(R.id.editTextName);
     }
 
     @Override
     protected void onStart() {
         super.onStart();
         Log.w(TAG,"onStart");
+        nameEditText.setOnFocusChangeListener(this);
 
     }
 
@@ -91,5 +95,15 @@ public class MainActivity extends AppCompatActivity {
         TextView mainTextView = findViewById(R.id.textViewmain);
         int result = data.getExtras().getInt("btdevices");
         mainTextView.setText("no of bt devices discovered ="+result);
+    }
+
+    @Override
+    public void onFocusChange(View v, boolean hasFocus) {
+        if(!hasFocus){
+          String name =  nameEditText.getText().toString();
+          if(!name.contains("volvo")){
+              Toast.makeText(this, "name doens't exist", Toast.LENGTH_SHORT).show();
+          }
+        }
     }
 }
