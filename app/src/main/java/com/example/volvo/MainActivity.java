@@ -102,7 +102,7 @@ public class MainActivity extends AppCompatActivity implements View.OnFocusChang
         if(!hasFocus){
           String name =  nameEditText.getText().toString();
           if(!name.contains("volvo")){
-              Toast.makeText(this, "name doens't exist", Toast.LENGTH_SHORT).show();
+              Toast.makeText(this, "name doens't exist", Toast.LENGTH_LONG).show();
           }
         }
     }
