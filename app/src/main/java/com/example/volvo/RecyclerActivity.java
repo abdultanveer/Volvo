@@ -7,23 +7,28 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
 import android.widget.Toast;
+
+import com.example.volvo.adapters.MyAdapter;
+import com.example.volvo.model.TodoNote;
+
+import java.util.ArrayList;
 
 public class RecyclerActivity extends AppCompatActivity implements AdapterView.OnItemClickListener {
 
     String[] languages = new String[]{"hindi","kannada","english"}; //plug
     RecyclerView langsListView; //socket--- holder design pattern is optional
     MyAdapter adapter;
+    ArrayList<TodoNote> todoNoteArrayList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recycler);
+        createData();
 
         langsListView = findViewById(R.id.languagesListview);
-        adapter = new MyAdapter(this,languages);
+        adapter = new MyAdapter(this,todoNoteArrayList);
 
         //langsListView.setOnItemClickListener(this);
 
@@ -35,6 +40,17 @@ public class RecyclerActivity extends AppCompatActivity implements AdapterView.O
         langsListView.setLayoutManager(new LinearLayoutManager(this)); //layout manager helps arrange the planks vertically/horizontally/grid/staggered grid
 
         langsListView.setAdapter(adapter);
+    }
+
+    private void createData() {
+        todoNoteArrayList = new ArrayList<>();
+        todoNoteArrayList.add(new TodoNote("title","subtitle"));
+        todoNoteArrayList.add(new TodoNote("title","subtitle"));
+        todoNoteArrayList.add(new TodoNote("title","subtitle"));
+        todoNoteArrayList.add(new TodoNote("title","subtitle"));
+        todoNoteArrayList.add(new TodoNote("title","subtitle"));
+        todoNoteArrayList.add(new TodoNote("title","subtitle"));
+
     }
 
     @Override

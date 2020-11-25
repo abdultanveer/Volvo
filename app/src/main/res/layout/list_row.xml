@@ -6,12 +6,20 @@
     android:orientation="vertical">
 
     <TextView
-        android:id="@+id/textViewrow"
+        android:id="@+id/textViewtitle"
         android:padding="15dp"
         android:textStyle="bold"
         android:textColor="@color/white"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="TextView" />
+
+    <TextView
+        android:padding="15dp"
+        android:id="@+id/textviewsubtitle"
+        android:textColor="@android:color/holo_blue_bright"
+        android:layout_width="match_parent"
+        android:text="subtitle"
+        android:layout_height="wrap_content"/>
 
 </LinearLayout>

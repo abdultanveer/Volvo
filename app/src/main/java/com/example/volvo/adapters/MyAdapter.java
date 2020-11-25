@@ -1,4 +1,4 @@
-package com.example.volvo;
+package com.example.volvo.adapters;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -9,16 +9,23 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.volvo.R;
+import com.example.volvo.model.TodoNote;
+
+import java.util.ArrayList;
+
 public class MyAdapter extends RecyclerView.Adapter<MyAdapter.WordViewHolder> {
-    String[] langs;
+    ArrayList<TodoNote> todoNotes;
     //Context mContext;
     LayoutInflater miLayoutInflater;
 
-    public MyAdapter(Context context, String[] languages) {
-        langs = languages;
+    public MyAdapter(Context context, ArrayList<TodoNote> todoNoteArrayList) {
+        todoNotes = todoNoteArrayList;
         //mContext = context;
         miLayoutInflater = LayoutInflater.from(context);
     }
+
+
 
     /**
      * onCreateViewHolder -- punith
@@ -42,7 +49,10 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.WordViewHolder> {
      */
     @Override
     public void onBindViewHolder(@NonNull MyAdapter.WordViewHolder holder, int position) {
-        holder.rowTextView.setText(langs[position]);
+        holder.titleTextView.setText(todoNotes.get(position).getTitle());
+        holder.subtitleTextView.setText(todoNotes.get(position).getSubTitle());
+
+        //todoNotes.get(position).toString());
     }
 
     /**
@@ -52,18 +62,21 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.WordViewHolder> {
      */
     @Override
     public int getItemCount() {
-        return langs.length;
+        return todoNotes.size();
     }
 
     /**
      * This is like a box holding the stocked row planks
      */
     public class WordViewHolder  extends  RecyclerView.ViewHolder{
-        TextView rowTextView;
+        TextView titleTextView;
+        TextView subtitleTextView;
 
         public WordViewHolder(@NonNull View itemView) { //the mitemview you return from oncreateviewholder
             super(itemView);
-            rowTextView = itemView.findViewById(R.id.textViewrow);
+            titleTextView = itemView.findViewById(R.id.textViewtitle);
+            subtitleTextView = itemView.findViewById(R.id.textviewsubtitle);
+
         }
     }
 }
