@@ -10,14 +10,17 @@ import android.os.Bundle;
 import android.os.PersistableBundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class MainActivity extends AppCompatActivity implements View.OnFocusChangeListener {
+public class MainActivity extends AppCompatActivity implements View.OnFocusChangeListener, AdapterView.OnItemSelectedListener {
 
     private static final String TAG = MainActivity.class.getSimpleName() ;
     EditText nameEditText;
+    Spinner spinner;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,6 +28,7 @@ public class MainActivity extends AppCompatActivity implements View.OnFocusChang
         setContentView(R.layout.activity_main); //layout inflater
         Log.i(TAG,"oncreate");
         nameEditText = findViewById(R.id.editTextName);
+        spinner = findViewById(R.id.spinner);
     }
 
     @Override
@@ -32,6 +36,7 @@ public class MainActivity extends AppCompatActivity implements View.OnFocusChang
         super.onStart();
         Log.w(TAG,"onStart");
         nameEditText.setOnFocusChangeListener(this);
+        spinner.setOnItemSelectedListener(this);
 
     }
 
@@ -105,5 +110,16 @@ public class MainActivity extends AppCompatActivity implements View.OnFocusChang
               Toast.makeText(this, "name doens't exist", Toast.LENGTH_LONG).show();
           }
         }
+    }
+
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+        String selectedItem = parent.getItemAtPosition(position).toString();
+        Toast.makeText(this, selectedItem, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> parent) {
+
     }
 }
