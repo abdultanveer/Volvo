@@ -1,6 +1,8 @@
 package com.example.volvo;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 import android.view.View;
@@ -12,8 +14,8 @@ import android.widget.Toast;
 public class RecyclerActivity extends AppCompatActivity implements AdapterView.OnItemClickListener {
 
     String[] languages = new String[]{"hindi","kannada","english"}; //plug
-    ListView langsListView; //socket
-    ArrayAdapter<String> adapter;
+    RecyclerView langsListView; //socket--- holder design pattern is optional
+    MyAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,14 +23,17 @@ public class RecyclerActivity extends AppCompatActivity implements AdapterView.O
         setContentView(R.layout.activity_recycler);
 
         langsListView = findViewById(R.id.languagesListview);
+        adapter = new MyAdapter(this,languages);
 
-        langsListView.setOnItemClickListener(this);
+        //langsListView.setOnItemClickListener(this);
 
-        adapter = new ArrayAdapter<>(this,
+        /*adapter = new ArrayAdapter<>(this,
                 R.layout.list_row,
                 R.id.textViewrow,//new int[]{R.id.text1,R.id.text2}
                 //android.R.layout.simple_list_item_1, // layout of each row in the listview
-                languages);
+                languages);*/
+        langsListView.setLayoutManager(new LinearLayoutManager(this)); //layout manager helps arrange the planks vertically/horizontally/grid/staggered grid
+
         langsListView.setAdapter(adapter);
     }
 
