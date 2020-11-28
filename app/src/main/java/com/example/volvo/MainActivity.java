@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.os.PersistableBundle;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.Spinner;
@@ -29,6 +30,7 @@ public class MainActivity extends AppCompatActivity implements View.OnFocusChang
         Log.i(TAG,"oncreate");
         nameEditText = findViewById(R.id.editTextName);
         spinner = findViewById(R.id.spinner);
+
     }
 
     @Override
