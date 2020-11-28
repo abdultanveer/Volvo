@@ -105,4 +105,10 @@ public class RecyclerActivity extends AppCompatActivity implements AdapterView.O
         Toast.makeText(this, "context item selected", Toast.LENGTH_SHORT).show();
         return true;
     }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+
+    }
 }
