@@ -22,6 +22,7 @@ public class MainActivity extends AppCompatActivity implements View.OnFocusChang
     private static final String TAG = MainActivity.class.getSimpleName() ;
     EditText nameEditText;
     Spinner spinner;
+    TextView mainTextView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,6 +31,7 @@ public class MainActivity extends AppCompatActivity implements View.OnFocusChang
         Log.i(TAG,"oncreate");
         nameEditText = findViewById(R.id.editTextName);
         spinner = findViewById(R.id.spinner);
+        mainTextView = findViewById(R.id.textViewmain);
 
     }
 
@@ -81,10 +83,12 @@ public class MainActivity extends AppCompatActivity implements View.OnFocusChang
         switch (view.getId()){
             case R.id.buttonLogin:
                // Toast.makeText(this, "android @ volvo", Toast.LENGTH_SHORT).show();
-                Intent hIntent = new Intent(MainActivity.this, HomeActivity.class);//explicit intent
+               /* Intent hIntent = new Intent(MainActivity.this, HomeActivity.class);//explicit intent
                 hIntent.putExtra("mykey","abdul ansari");
                 //startActivity(hIntent);
-                startActivityForResult(hIntent,1234);
+                startActivityForResult(hIntent,1234);*/
+              String name =  nameEditText.getText().toString();
+              mainTextView.setText(name);
                 break;
             case R.id.buttonCancel:
                // Intent driveIntent =  new Intent("com.google.android.apps.docs.DRIVE_OPEN");
