@@ -15,4 +15,5 @@
     <string name="name_hint">enter name</string>
     <string name="pwd_hint">enter password</string>
     <string name="rem_pwd">remember password</string>
+    <string name="login">login</string>
 </resources>

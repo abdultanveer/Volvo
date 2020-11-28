@@ -12,11 +12,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="31dp"
-        android:layout_marginTop="67dp"
-        android:ems="10"
 
+        android:layout_marginTop="67dp"
+        android:layout_marginBottom="65dp"
+        android:ems="10"
         android:hint="@string/name_hint"
         android:inputType="textAutoCorrect"
+        app:layout_constraintBottom_toBottomOf="@+id/textViewmain"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -46,40 +48,39 @@
         android:id="@+id/buttonLogin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="33dp"
         android:onClick="clickHandler"
         android:text="@string/login"
         app:layout_constraintBaseline_toBaselineOf="@+id/buttonCancel"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/buttonCancel"
-        android:layout_width="@dimen/cancel_button_width"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="30dp"
-        android:layout_marginTop="45dp"
+        android:layout_marginStart="52dp"
+        android:layout_marginTop="67dp"
         android:onClick="clickHandler"
         android:text="cancel"
         app:layout_constraintStart_toEndOf="@+id/buttonLogin"
-        app:layout_constraintTop_toBottomOf="@+id/checkBox" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/textViewmain"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="2dp"
-        android:layout_marginTop="19dp"
+        android:layout_marginTop="43dp"
         android:text="TextView"
         app:layout_constraintStart_toStartOf="@+id/buttonLogin"
         app:layout_constraintTop_toBottomOf="@+id/buttonLogin" />
 
     <Spinner
         android:id="@+id/spinner"
-        android:entries="@array/labels"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="23dp"
+        android:layout_marginTop="26dp"
+        android:entries="@array/labels"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewmain" />
+        app:layout_constraintTop_toBottomOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
