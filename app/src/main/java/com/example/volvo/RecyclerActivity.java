@@ -6,11 +6,13 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
+import android.view.ContextMenu;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.Toast;
 
 import com.example.volvo.adapters.MyAdapter;
@@ -32,6 +34,9 @@ public class RecyclerActivity extends AppCompatActivity implements AdapterView.O
         createData();
 
         langsListView = findViewById(R.id.languagesListview);
+        Button coButton = findViewById(R.id.contextbuttto);
+
+        registerForContextMenu(coButton);
         adapter = new MyAdapter(this,todoNoteArrayList);
 
         //langsListView.setOnItemClickListener(this);
@@ -85,6 +90,19 @@ public class RecyclerActivity extends AppCompatActivity implements AdapterView.O
 
                  break;
          }
+        return true;
+    }
+
+    @Override
+    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
+        super.onCreateContextMenu(menu, v, menuInfo);
+        getMenuInflater().inflate(R.menu.recycler_menu,menu);
+    }
+
+    @Override
+    public boolean onContextItemSelected(@NonNull MenuItem item) {
+         super.onContextItemSelected(item);
+        Toast.makeText(this, "context item selected", Toast.LENGTH_SHORT).show();
         return true;
     }
 }
