@@ -1,10 +1,14 @@
 package com.example.volvo;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Toast;
@@ -58,5 +62,29 @@ public class RecyclerActivity extends AppCompatActivity implements AdapterView.O
         String item = adapterView.getItemAtPosition(position).toString();
         Toast.makeText(this, item, Toast.LENGTH_SHORT).show();
 
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+         super.onCreateOptionsMenu(menu);
+        MenuInflater menuInflater = getMenuInflater(); //inflater will inflate the recycler_menu.xml
+        menuInflater.inflate(R.menu.recycler_menu,menu);
+        return true;
+    }
+
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+         super.onOptionsItemSelected(item);
+         switch (item.getItemId()){
+             case R.id.first:
+                 Toast.makeText(this, "first selected", Toast.LENGTH_SHORT).show();
+                 break;
+             case R.id.second:
+                 Toast.makeText(this, "second selected", Toast.LENGTH_SHORT).show();
+
+                 break;
+         }
+        return true;
     }
 }
