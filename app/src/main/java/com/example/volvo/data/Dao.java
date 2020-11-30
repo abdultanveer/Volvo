@@ -2,6 +2,7 @@ package com.example.volvo.data;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import com.example.volvo.data.FeedReaderContract.FeedEntry;
 
@@ -31,7 +32,11 @@ public class Dao {
         values.put(FeedEntry.COLUMN_NAME_SUBTITLE,pwd);
         database.insert(FeedEntry.TABLE_NAME,null,values);
     }
-    public void readRow(){}
+    public Cursor readRow(){
+      //Cursor cursor = database.rawQuery("select * from entry",null);
+        Cursor cursor = database.query(FeedEntry.TABLE_NAME, null,null,null,null,null,null);
+        return cursor;
+    }
     public void updateRow(){}
     public void deleteRow(){}
 

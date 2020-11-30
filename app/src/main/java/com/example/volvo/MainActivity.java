@@ -3,9 +3,11 @@ package com.example.volvo;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import com.example.volvo.data.FeedReaderContract.FeedEntry;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.PersistableBundle;
@@ -140,6 +142,12 @@ public class MainActivity extends AppCompatActivity implements View.OnFocusChang
                 startActivity(dIntent);*/
 
                 //get data from db and put it in textview
+                Cursor cursor = dbAcessObj.readRow();
+                cursor.moveToLast();
+                int titleIndex = cursor.getColumnIndexOrThrow(FeedEntry.COLUMN_NAME_TITLE);
+                int subtitleIndex = cursor.getColumnIndexOrThrow(FeedEntry.COLUMN_NAME_SUBTITLE);
+                String data = cursor.getString(titleIndex);
+                mainTextView.setText(data);
                 break;
         }
 
