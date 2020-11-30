@@ -5,6 +5,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.PersistableBundle;
@@ -20,7 +21,9 @@ import android.widget.Toast;
 public class MainActivity extends AppCompatActivity implements View.OnFocusChangeListener, AdapterView.OnItemSelectedListener {
 
     private static final String TAG = MainActivity.class.getSimpleName() ;
-    EditText nameEditText;
+    public static final String FILE_NAME = "volvoprefs";
+    public static final int MODE = MODE_PRIVATE;
+    EditText nameEditText,pwdEditText;
     Spinner spinner;
     TextView mainTextView;
 
@@ -30,6 +33,7 @@ public class MainActivity extends AppCompatActivity implements View.OnFocusChang
         setContentView(R.layout.activity_main); //layout inflater
         Log.i(TAG,"oncreate");
         nameEditText = findViewById(R.id.editTextName);
+        pwdEditText = findViewById(R.id.editTextPassword);
         spinner = findViewById(R.id.spinner);
         mainTextView = findViewById(R.id.textViewmain);
 
@@ -48,16 +52,43 @@ public class MainActivity extends AppCompatActivity implements View.OnFocusChang
     protected void onPause() {
         super.onPause();
         Log.d(TAG,"onpause");
+        saveData();
 
+    }
+
+    private void saveData() {
+        //create a file volvoprefs
+        SharedPreferences preferences = getSharedPreferences(FILE_NAME, MODE);
+        //open the file in edit mode
+        SharedPreferences.Editor editor = preferences.edit();
+        //get data from 2 edittexts
+        String name = nameEditText.getText().toString();
+        String pwd = pwdEditText.getText().toString();
+        //write to file
+        editor.putString("nm",name);
+        editor.putString("pw",pwd);
+        //save the file
+        editor.apply();
     }
 
     @Override
     protected void onResume() {
         super.onResume();
         Log.e(TAG,"onresume");
+        restoreData();
 
     }
+    private void restoreData(){
+        //open the file
+        SharedPreferences preferences = getSharedPreferences(FILE_NAME,MODE_PRIVATE);
+        //read from the file
+        String name = preferences.getString("nm","");
+        String pwd = preferences.getString("pw","");
+        //write data into edittexts
+        nameEditText.setText(name);
+        pwdEditText.setText(pwd);
 
+    }
     @Override
     protected void onStop() {
         super.onStop();
