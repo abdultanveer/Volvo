@@ -18,6 +18,10 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.volvo.data.Dao;
+
+import java.io.File;
+
 public class MainActivity extends AppCompatActivity implements View.OnFocusChangeListener, AdapterView.OnItemSelectedListener {
 
     private static final String TAG = MainActivity.class.getSimpleName() ;
@@ -26,6 +30,7 @@ public class MainActivity extends AppCompatActivity implements View.OnFocusChang
     EditText nameEditText,pwdEditText;
     Spinner spinner;
     TextView mainTextView;
+    Dao dbAcessObj;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +41,8 @@ public class MainActivity extends AppCompatActivity implements View.OnFocusChang
         pwdEditText = findViewById(R.id.editTextPassword);
         spinner = findViewById(R.id.spinner);
         mainTextView = findViewById(R.id.textViewmain);
+        dbAcessObj = new Dao(this);
+        dbAcessObj.openDb();
 
     }
 
@@ -107,6 +114,9 @@ public class MainActivity extends AppCompatActivity implements View.OnFocusChang
     public void onSaveInstanceState(@NonNull Bundle outState, @NonNull PersistableBundle outPersistentState) {
         super.onSaveInstanceState(outState, outPersistentState);
         outState.putString("key","abdul");
+       /* String directorypath = null;
+        String filename = null;
+        File myFile = new File(directorypath, filename);*/
     }
 
     public void clickHandler(View view) {
@@ -119,12 +129,17 @@ public class MainActivity extends AppCompatActivity implements View.OnFocusChang
                 //startActivity(hIntent);
                 startActivityForResult(hIntent,1234);*/
               String name =  nameEditText.getText().toString();
-              mainTextView.setText(name);
+              String pwd = pwdEditText.getText().toString();
+              //put data in db
+                dbAcessObj.createRow(name,pwd);
+              //mainTextView.setText(name);
                 break;
             case R.id.buttonCancel:
                // Intent driveIntent =  new Intent("com.google.android.apps.docs.DRIVE_OPEN");
-                Intent dIntent = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:12345678"));//implicit intent
-                startActivity(dIntent);
+                /*Intent dIntent = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:12345678"));//implicit intent
+                startActivity(dIntent);*/
+
+                //get data from db and put it in textview
                 break;
         }
 

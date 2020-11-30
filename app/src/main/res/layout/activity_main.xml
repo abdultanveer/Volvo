@@ -27,7 +27,7 @@
         android:layout_marginBottom="31dp"
         android:ems="10"
         android:hint="@string/pwd_hint"
-        android:inputType="numberPassword"
+        android:inputType="text"
         app:layout_constraintBottom_toTopOf="@+id/buttonLogin"
         app:layout_constraintStart_toStartOf="parent" />
 
