@@ -15,7 +15,10 @@ import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.CursorAdapter;
 import android.widget.EditText;
+import android.widget.ListView;
+import android.widget.SimpleCursorAdapter;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -43,8 +46,21 @@ public class MainActivity extends AppCompatActivity implements View.OnFocusChang
         pwdEditText = findViewById(R.id.editTextPassword);
         spinner = findViewById(R.id.spinner);
         mainTextView = findViewById(R.id.textViewmain);
+
         dbAcessObj = new Dao(this);
         dbAcessObj.openDb();
+        ListView dbListView = findViewById(R.id.listviewdb);
+
+        Cursor dataCursor = dbAcessObj.readRow();
+
+        CursorAdapter adapter = new SimpleCursorAdapter(this,
+                android.R.layout.simple_list_item_2,//row layout
+                dataCursor, //data
+                new String[]{FeedEntry.COLUMN_NAME_TITLE,FeedEntry.COLUMN_NAME_SUBTITLE},//col names in table
+               new int[]{android.R.id.text1, android.R.id.text2},
+               1); //textviews of each row
+
+        dbListView.setAdapter(adapter);
 
     }
 
@@ -146,7 +162,7 @@ public class MainActivity extends AppCompatActivity implements View.OnFocusChang
                 cursor.moveToLast();
                 int titleIndex = cursor.getColumnIndexOrThrow(FeedEntry.COLUMN_NAME_TITLE);
                 int subtitleIndex = cursor.getColumnIndexOrThrow(FeedEntry.COLUMN_NAME_SUBTITLE);
-                String data = cursor.getString(titleIndex);
+                String data = cursor.getString(titleIndex)+"\n"+cursor.getString(subtitleIndex);
                 mainTextView.setText(data);
                 break;
         }
